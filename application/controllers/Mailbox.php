@@ -103,8 +103,8 @@
                 'protocol' => 'smtp',
                 'smtp_host' => 'ssl://smtp.googlemail.com',
                 'smtp_port' => 465,
-                'smtp_user' => '', //isi dengan alamat email/ username email gmail
-                'smtp_pass' => '', //isi dengan password gmail
+                'smtp_user' => 'trustjaya@gmail.com', //isi dengan alamat email/ username email gmail
+                'smtp_pass' => 'trust010994jaya', //isi dengan password gmail
                 'mailtype' => 'html',
                 'charset' => 'iso-8859-1',
                 'wordwrap' => TRUE
@@ -122,7 +122,7 @@
             $this->email->attach($attachment['full_path']);
 
             if($this->email->send()){
-                echo 'Email send.';
+                $this->template->load('template', 'mailbox/sendmail');
             }else{
                 show_error($this->email->print_debugger());
             }

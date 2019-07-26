@@ -79,7 +79,7 @@
                     <?php
                         if($row->attachment){
                     ?>
-                        <a href="<?php echo base_url();?>uploads/email/<?php echo $row->attachment;?>" class="btn btn-info" ><i class='fa fa-search'></i> Download Attachment</a>
+                        <a href="<?php echo base_url();?>uploads/email/<?php echo $row->attachment;?>" target="_blank" class="btn btn-info" ><i class='fa fa-search'></i> Download Attachment</a>
                     <?php
                         }
                     ?>

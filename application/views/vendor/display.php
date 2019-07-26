@@ -86,7 +86,7 @@
                             <?php
                                 if($row->catalog){
                             ?>
-                                <a href="<?php echo base_url();?>uploads/catalog/<?php echo $row->catalog;?>" class="btn btn-info" ><i class='fa fa-search'></i> Download Catalog</a>
+                                <a href="<?php echo base_url();?>uploads/catalog/<?php echo $row->catalog;?>" target="_blank" class="btn btn-info" ><i class='fa fa-search'></i> Download Catalog</a>
                             <?php
                                 }
                             ?>
