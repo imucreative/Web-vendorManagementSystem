@@ -3,7 +3,7 @@ var table;
 
 $(document).ready(function() {
     //datatables
-    table = $('.categoryTable').DataTable({
+    table = $('.usersTable').DataTable({
         //responsive: true,
         "processing": true, //Feature control the processing indicator.
         "serverSide": true, //Feature control DataTables' server-side processing mode.
@@ -11,7 +11,7 @@ $(document).ready(function() {
 
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": "category/ajax_list",
+            "url": "users/ajax_list",
             "type": "POST"
         },
 
@@ -30,26 +30,30 @@ $(document).ready(function() {
         $(this).next().empty();
     });
     
+    /*
     $(".nameCategory").on('keyup', function(e){
         if(e.keyCode === 13){
             //alert(e.keyCode);
             save();
         }
     });
+    */
 });
 
 
 
-function addCategory(){
+function addUsers(){
     save_method = 'add';
+    $('.dispStatusUser').hide();
+    $('.statusUser').show();
     $('#form')[0].reset(); // reset form on modals
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
-    $('#modal-form-category').modal('show'); // show bootstrap modal
-    $('.modal-title').text('Input Category'); // Set Title to Bootstrap modal title
+    $('#modal-form-users').modal('show'); // show bootstrap modal
+    $('.modal-title').text('Input User'); // Set Title to Bootstrap modal title
 }
 
-function editCategory(id){
+function editUsers(id){
     save_method = 'update';
     $('#form')[0].reset(); // reset form on modals
     $('.form-group').removeClass('has-error'); // clear error class
@@ -57,14 +61,18 @@ function editCategory(id){
 
     //Ajax Load data from ajax
     $.ajax({
-        url : "category/ajax_edit/" + id,
+        url : "users/ajax_edit/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data){
-            $('[name="categoryId"]').val(data.categoryId);
-            $('[name="name"]').val(data.name);
-            $('#modal-form-category').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title').text('Edit Category'); // Set title to Bootstrap modal title
+            $('[name="userId"]').val(data.dataUser.userId);
+            $('[name="name"]').val(data.dataUser.name);
+            $('[name="username"]').val(data.dataUser.username);
+            $('.status').val(data.statusUser);
+            $('.dispStatusUser').show();
+            $('.statusUser').hide();
+            $('#modal-form-users').modal('show'); // show bootstrap modal when complete loaded
+            $('.modal-title').text('Edit User'); // Set title to Bootstrap modal title
         }, error: function (jqXHR, textStatus, errorThrown){
             alert('Error get data from ajax');
         }
@@ -73,15 +81,15 @@ function editCategory(id){
 
 
 
-function saveCategory(){
+function save(){
     $('#btnSave').text('saving...'); //change button text
     $('#btnSave').attr('disabled',true); //set button disable 
     var url;
 
     if(save_method == 'add') {
-        url = "category/ajax_add";
+        url = "users/ajax_add";
     } else {
-        url = "category/ajax_update";
+        url = "users/ajax_update";
     }
 
     // ajax adding data to database
@@ -92,9 +100,9 @@ function saveCategory(){
         dataType: "JSON",
         success: function(data){
             if(data.status){ //if success close modal and reload ajax table
-                $('#modal-form-category').modal('hide');
+                $('#modal-form-users').modal('hide');
                 //reload_table();
-                window.open("category", '_self');
+                window.open("users", '_self');
             }else{
                 for (var i = 0; i < data.inputerror.length; i++) {
                     $('[name="'+data.inputerror[i]+'"]').parent().parent().addClass('has-error'); //select parent twice to select div form-group class and add has-error class
@@ -111,18 +119,18 @@ function saveCategory(){
     });
 }
 
-function deleteCategory(id){
+function deleteUsers(id){
     if(confirm('Are you sure delete this data?')){
         // ajax delete data to database
         $.ajax({
-            url : "category/ajax_delete/"+id,
+            url : "users/ajax_delete/"+id,
             type: "POST",
             dataType: "JSON",
             success: function(data){
                 //if success reload ajax table
                 $('#modal_form').modal('hide');
                 //reload_table();
-                window.open("category", '_self');
+                window.open("users", '_self');
             }, error: function (jqXHR, textStatus, errorThrown){
                 alert('Error deleting data');
             }

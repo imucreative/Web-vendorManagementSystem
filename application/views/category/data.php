@@ -68,7 +68,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                    <button type="button" class="btn btn-primary"  id="btnSave" onclick="save()"><i class="fa fa-save"></i> Save</button>
+                    <button type="button" class="btn btn-primary"  id="btnSave" onclick="saveCategory()"><i class="fa fa-save"></i> Save</button>
                 </div>
             </form>
         </div>

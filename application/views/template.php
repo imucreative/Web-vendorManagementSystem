@@ -104,6 +104,13 @@
                             <!--<span class="label label-primary pull-right">NEW</span>-->
                         </a>
                     </li>
+
+                    <li <?php echo $activeUsers;?>>
+                        <a href="<?php echo base_url()?>index.php/users">
+                            <i class="fa fa-users"></i> <span class="nav-label">Users</span> 
+                            <span class="label label-primary pull-right">NEW</span>
+                        </a>
+                    </li>
                     <?php
                         }
                     ?>
@@ -246,6 +253,7 @@
     
     <script src="<?php echo base_url()?>template/assets/jscustom.js"></script>
     <script src="<?php echo base_url()?>template/assets/jsCustomCategory.js"></script>
+    <script src="<?php echo base_url()?>template/assets/jsCustomUsers.js"></script>
     <link href="<?php echo base_url()?>template/assets/csscustom.css" rel="stylesheet">
 
 
