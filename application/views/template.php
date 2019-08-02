@@ -40,6 +40,9 @@
     if($menuActive == 'info'){
         $activeInfo = "class='active'";
     }
+    if($menuActive == 'user'){
+        $activeUser = "class='active'";
+    }
     if($menuActive == 'category'){
         $activeCategory = "class='active'";
     }
