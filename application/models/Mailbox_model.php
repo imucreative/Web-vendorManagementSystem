@@ -9,6 +9,7 @@ class Mailbox_model extends Ci_Model{
     
     function selectAll(){
 		$this->db->where('delete', 0);
+		$this->db->order_by('id', 'DESC');
 		$query	= $this->db->get($this->table);
 		return $query;
     }

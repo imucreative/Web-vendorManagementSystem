@@ -1,7 +1,8 @@
 <?php
 class Vendor_model extends Ci_Model{
     
-    public $table	= 'dtbvendor';
+	public $table			= 'dtbvendor';
+	public $tableCatalog	= 'dtbcatalog';
     
 
     //==================================================================================================
@@ -41,11 +42,19 @@ class Vendor_model extends Ci_Model{
                 'telp'			=> $telp,
                 'fax'			=> $fax,
 				'email'			=> $email,
-				'npwp'			=> $npwp,
-				'catalog'		=> $catalog
+				'npwp'			=> $npwp
 			);
 		
 		$this->db->insert($this->table, $data);
+		//$insertId = $this->db->insert_id();
+
+			$dataCatalog	= array(
+				'vendorId'	=> $vendorId,
+				'name'		=> $name,
+				'file'		=> $catalog,
+				'delete'	=> 0
+			);
+		$this->db->insert($this->tableCatalog, $dataCatalog);
 	}
     
 	function update($catalog){
@@ -59,7 +68,7 @@ class Vendor_model extends Ci_Model{
 		$email		    = strtoupper($this->input->post('email'));
 		$npwp		    = strtoupper($this->input->post('npwp'));
 		
-		if($catalog == null){
+		//if($catalog == null){
 			$data	= array(
                 'vendorId'      => $vendorId,
                 'categoryId'    => $categoryId,
@@ -71,6 +80,7 @@ class Vendor_model extends Ci_Model{
 				'email'			=> $email,
 				'npwp'			=> $npwp
 			);
+		/*
 		}else{
 			$data	= array(
                 'vendorId'      => $vendorId,
@@ -85,6 +95,7 @@ class Vendor_model extends Ci_Model{
 				'catalog'		=> $catalog
 			);
 		}
+		*/
 		
 		$this->db->where('vendorId', $this->input->post('vendorId'));
 		$this->db->update($this->table, $data);

@@ -41,7 +41,7 @@
                     <input type="hidden" name="vendorId" class="form-control to" value="<?php echo $row->vendorId;?>" />
 
                     <div class="form-group form-group-from"><label class="col-sm-2 control-label">From:</label>
-                        <div class="col-sm-10"><input type="text" name="from" class="form-control from" value="<?php echo get_data_info('email');?>" required /></div>
+                        <div class="col-sm-10"><input type="text" name="from" class="form-control from" value="<?php echo get_data_info('email');?>" required readonly /></div>
                     </div>
                     <div class="form-group form-group-to"><label class="col-sm-2 control-label">To:</label>
                         <div class="col-sm-10">

@@ -87,7 +87,7 @@
                     <div class="form-group">
                         <label class="col-sm-1 control-label">Catalog</label>
                         <div class="col-sm-4">
-                            <input type="file" name="catalog" class="file-input" required />
+                            <input type="file" name="catalog" class="form-control" required />
                         </div>
                         <div class="col-sm-7">
                             <font color="red"><?php echo $gagalInputCatalog;?></font>

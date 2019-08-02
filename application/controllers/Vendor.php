@@ -5,6 +5,7 @@
 		function __construct() {
 			parent::__construct();
 			$this->load->model('Vendor_model', 'vendor');
+			$this->load->model('Catalog_model', 'catalog');
 			$this->load->model('Category_model', 'category');
 			
 			if(!$this->session->userdata('userId')){
@@ -47,9 +48,10 @@
 				redirect('vendor');
 
 			}else{
-				$vendorId			= $this->uri->segment(3);
-				$data['row']		= $this->vendor->getVendorById($vendorId)->row();
-				$data['category']	= $this->category->selectAll()->result();
+				$vendorId				= $this->uri->segment(3);
+				$data['row']			= $this->vendor->getVendorById($vendorId)->row();
+				$data['category']		= $this->category->selectAll()->result();
+				$data['catalog']		= $this->catalog->selectAllByVendor($data['row']->vendorId)->result();
 				$this->template->load('template', 'vendor/edit', $data);
 			}
 		}
@@ -58,6 +60,7 @@
 			$vendorId			= $this->uri->segment(3);
 			$data['row']		= $this->vendor->getVendorById($vendorId)->row();
 			$data['category']	= $this->category->getCategoriByCategoryId($data['row']->categoryId)->row();
+			$data['catalog']		= $this->catalog->selectAllByVendor($data['row']->vendorId)->result();
 			$this->template->load('template', 'vendor/display', $data);
 		}
 		

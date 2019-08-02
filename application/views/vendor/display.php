@@ -83,13 +83,7 @@
                     <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-1">
                             <a href="<?php echo base_url();?>index.php/vendor" class="btn btn-white" ><i class='fa fa-arrow-left'></i> Cancel</a>
-                            <?php
-                                if($row->catalog){
-                            ?>
-                                <a href="<?php echo base_url();?>uploads/catalog/<?php echo $row->catalog;?>" target="_blank" class="btn btn-info" ><i class='fa fa-search'></i> Download Catalog</a>
-                            <?php
-                                }
-                            ?>
+                            
                         </div>
                     </div>
 
@@ -98,4 +92,56 @@
             </div>
         </div>
     </div>
+
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Catalog Vendor <small>Input.</small></h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    
+                </div>
+            </div>
+            <div class="ibox-content">
+
+                <table class="table table-striped table-hover myTable" >
+                    <thead>
+                        <tr>
+                            <th width='5%'><center>NO</center></th>
+                            <th width='70%'><center>NAME</center></th>
+                            <th width='25%'>
+                                <center>
+                                #
+                                </center>
+                            </th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        <?php
+                            $no = 1;
+                            foreach ($catalog as $rCatalog){
+                        ?>
+                                <tr>
+                                    <td align='center'><?php echo $no;?></td>
+                                    <td><?php echo $rCatalog->name;?></td>
+                                    <td align='center'>
+                                        <a href="<?php echo base_url();?>uploads/catalog/<?php echo $rCatalog->file;?>" target="_blank" class="btn btn-info btn-sm" ><i class='fa fa-download'></i> Download</a>
+                                        
+                                        
+									</td>
+                                </tr>
+                        <?php
+                            $no++;
+                            }
+                        ?>
+                    </tbody>
+                    
+                </table>
+            </div>
+        </div>
+    </div>
+
 </div>
