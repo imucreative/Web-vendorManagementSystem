@@ -84,6 +84,16 @@
 			$upload	= $this->upload->data();
 			return $upload['file_name'];
 		}
+
+
+
+		function tambah_rating(){
+			if ($this->input->post('rating')!=''){
+				$data = array('rating'=>$this->input->post('rating'));
+				$where = array('vendorId' => $this->input->post('vendorId'));
+			$this->model_app->updateRating('dtbvendor', $data, $where);
+			}
+		}
 		
 		
 

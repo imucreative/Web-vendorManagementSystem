@@ -19,10 +19,10 @@
                     
                     <div class="form-group">
                         <label class="col-sm-1 control-label">Vendor</label>
-                        <div class="col-sm-2">
+                        <?php /* <div class="col-sm-2">
                             <input type="text" name="vendorId" class="form-control" placeholder="* Code" required/>
-                        </div>
-                        <div class="col-sm-9">
+                        </div> */ ?>
+                        <div class="col-sm-11">
                             <input type="text" name="name" class="form-control" placeholder="* Name" required/>
                         </div>
                     </div>
@@ -54,6 +54,27 @@
                         <label class="col-sm-1 control-label">Address</label>
                         <div class="col-sm-11">
                             <input type="text" name="address" class="form-control" placeholder="* Address" required/>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">Provinsi.</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="provinsi" class="form-control" placeholder="* Provinsi" required/>
+                        </div>
+                        <label class="col-sm-1 control-label">Kota</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="kota" class="form-control" placeholder="* Kota" required/>
+                        </div>
+                        
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">Kelurahan.</label>
+                        <div class="col-sm-11">
+                            <input type="text" name="kelurahan" class="form-control" placeholder="* Kelurahan" required/>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
@@ -96,7 +117,7 @@
                     </div>
                     <div class="hr-line-dashed"></div>
 
-
+                    
                     
 
                     

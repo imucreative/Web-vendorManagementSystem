@@ -14,6 +14,66 @@ $(document).ready(function() {
     
 });
 
+function rateVendor(id, name, rating){
+    
+    $('#modalRating').modal('show');
+    $('.font-bold').text(name); // Set title to Bootstrap modal title
+
+    $('.idAwal').attr("id", id);
+    $('.rating').value(rating);
+
+    
+}
+
+function highlightStar(obj,id) {
+    removeHighlight(id);		
+    $('#rate-'+id+' li').each(function(index) {
+        $(this).addClass('highlight');
+        if(index == $('#rate-'+id+' li').index(obj)) {
+            return false;	
+        }
+    });
+}
+
+// saat mengarahkan kursor ke bintang maka bintang akan transparant
+function removeHighlight(id) {
+    $('#rate-'+id+' li').removeClass('selected');
+    $('#rate-'+id+' li').removeClass('highlight');
+}
+
+// Aksi untuk proses rating ke database di saat bintang diklik
+function addRating(obj,id) {
+    $('#rate-'+id+' li').each(function(index) {
+        $(this).addClass('selected');
+        $('#rate-'+id+' #rating').val((index+1));
+        if(index == $('#rate-'+id+' li').index(obj)) {
+            return false;	
+        }
+    });
+    $.ajax({
+    url: "<?php echo base_url('berita/tambah_rating'); ?>",
+    data:'id='+id+'&rating='+$('#rate-'+id+' #rating').val(),
+    type: "POST"
+    });
+}
+
+// Ketika Kursor meninggalkan bintang maka kembali kepada keaadan awal
+function resetRating(id) {
+    if($('#rate-'+id+' #rating').val() != 0) {
+        $('#rate-'+id+' li').each(function(index) {
+            $(this).addClass('selected');
+            if((index+1) == $('#rate-'+id+' #rating').val()) {
+                return false;	
+            }
+        });
+    }
+} 
+
+
+
+
+
+
 function composeEmail(id){
     
     //save_method = 'update';

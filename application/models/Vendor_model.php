@@ -23,22 +23,28 @@ class Vendor_model extends Ci_Model{
 	
 
     function simpan($catalog){
-        $vendorId       = strtoupper($this->input->post('vendorId'));
+        //$vendorId       = strtoupper($this->input->post('vendorId'));
         $categoryId     = strtoupper($this->input->post('categoryId'));
         $name           = strtoupper($this->input->post('name'));
         $description    = strtoupper($this->input->post('description'));
-        $address        = strtoupper($this->input->post('address'));
+		$address        = strtoupper($this->input->post('address'));
+		$provinsi       = strtoupper($this->input->post('provinsi'));
+		$kota        	= strtoupper($this->input->post('kota'));
+		$kelurahan      = strtoupper($this->input->post('kelurahan'));
         $telp           = strtoupper($this->input->post('telp'));
         $fax		    = strtoupper($this->input->post('fax'));
 		$email		    = strtoupper($this->input->post('email'));
 		$npwp		    = strtoupper($this->input->post('npwp'));
 		
 			$data	= array(
-                'vendorId'      => $vendorId,
+                //'vendorId'      => $vendorId,
                 'categoryId'    => $categoryId,
                 'name'          => $name,
                 'description'   => $description,
 				'address'		=> $address,
+				'provinsi'		=> $provinsi,
+				'kota'			=> $kota,
+				'kelurahan'		=> $kelurahan,
                 'telp'			=> $telp,
                 'fax'			=> $fax,
 				'email'			=> $email,
@@ -46,10 +52,10 @@ class Vendor_model extends Ci_Model{
 			);
 		
 		$this->db->insert($this->table, $data);
-		//$insertId = $this->db->insert_id();
+		$insertId = $this->db->insert_id();
 
 			$dataCatalog	= array(
-				'vendorId'	=> $vendorId,
+				'vendorId'	=> $insertId,
 				'name'		=> $name,
 				'file'		=> $catalog,
 				'delete'	=> 0
@@ -62,7 +68,10 @@ class Vendor_model extends Ci_Model{
         $categoryId     = strtoupper($this->input->post('categoryId'));
         $name           = strtoupper($this->input->post('name'));
         $description    = strtoupper($this->input->post('description'));
-        $address        = strtoupper($this->input->post('address'));
+		$address        = strtoupper($this->input->post('address'));
+		$provinsi       = strtoupper($this->input->post('provinsi'));
+		$kota        	= strtoupper($this->input->post('kota'));
+		$kelurahan      = strtoupper($this->input->post('kelurahan'));
         $telp           = strtoupper($this->input->post('telp'));
         $fax		    = strtoupper($this->input->post('fax'));
 		$email		    = strtoupper($this->input->post('email'));
@@ -75,6 +84,9 @@ class Vendor_model extends Ci_Model{
                 'name'          => $name,
                 'description'   => $description,
 				'address'		=> $address,
+				'provinsi'		=> $provinsi,
+				'kota'			=> $kota,
+				'kelurahan'		=> $kelurahan,
                 'telp'			=> $telp,
                 'fax'			=> $fax,
 				'email'			=> $email,
@@ -108,5 +120,11 @@ class Vendor_model extends Ci_Model{
 		$this->db->where('vendorId', $vendorId);
 		$this->db->update($this->table, $data);
 	}
+
+
+
+	public function updateRating($table, $data, $where){
+        return $this->db->update($table, $data, $where); 
+    }
 
 }

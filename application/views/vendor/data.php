@@ -26,13 +26,14 @@
                 <table class="table table-striped table-hover myTable" >
                     <thead>
                         <tr>
+                            <th width='5%'><center>#</center></th>
                             <th width='5%'><center>NO</center></th>
-                            <th width='25%'><center>VENDOR NAME</center></th>
+                            <th width='23%'><center>VENDOR NAME</center></th>
                             <th width='10%'><center>CATEGORY</center></th>
-                            <th width='20%'><center>ADDRESS</center></th>
+                            <th width='18%'><center>ADDRESS</center></th>
                             <th width='10%'><center>TELP</center></th>
                             <th width='10%'><center>EMAIL</center></th>
-                            <th width='20%'>
+                            <th width='24%'>
                                 <?php 
                                 $stat = $this->session->userdata('status');
                                     if($stat == 1){ 
@@ -56,6 +57,7 @@
                                 $rowCategory    = $CI->Category_model->getCategoriByCategoryId($r->categoryId)->row();
                         ?>
                                 <tr>
+                                    <td align='center'><button class='btn btn-warning btn-sm btn-outline' onclick="rateVendor('<?php echo $r->vendorId;?>', '<?php echo $r->name;?>', '<?php echo $r->rating;?>')"><i class='fa fa-star'></i></button></td>
                                     <td align='center'><?php echo $no;?></td>
                                     <td><?php echo $r->name;?></td>
                                     <td align='center'><?php echo $rowCategory->name;?></td>
@@ -66,15 +68,16 @@
                                         
                                         <?php
 
-                                            
                                             if($stat == 1){
                                                 echo anchor('vendor/edit/'.$r->vendorId, '<i class="fa fa-edit"></i>', 'class="btn btn-sm btn-info" title="Edit"')." | ".
                                                 anchor('vendor/display/'.$r->vendorId, '<i class="fa fa-eye"></i>', 'class="btn btn-sm btn-warning" title="Display"')." | ".
                                                 anchor("vendor/delete/".$r->vendorId, '<i class="fa fa-trash-o"></i>', ["class"=>"btn btn-sm btn-danger", "title"=>'Delete', "onclick"=>"return confirm('Are you sure delete this data?')"])." | ".
                                                 anchor("mailbox/compose/".$r->vendorId, '<i class="fa fa-send"></i>', ["class"=>"btn btn-sm btn-success", "title"=>'Send Email']);
+                                                
                                             }elseif($stat == 2){
                                                 echo anchor('vendor/display/'.$r->vendorId, '<i class="fa fa-eye"></i>', 'class="btn btn-sm btn-warning" title="Display"')." | ".
-                                                anchor("mailbox/compose/".$r->vendorId, '<i class="fa fa-send"></i>', ["class"=>"btn btn-sm btn-success", "title"=>'Send Email']);
+                                                anchor("mailbox/compose/".$r->vendorId, '<i class="fa fa-send"></i>', ["class"=>"btn btn-sm btn-success", "title"=>'Send Email'])." | ".
+                                                anchor("javascript:void(0)", '<i class="fa fa-star"></i>', ["class"=>"btn btn-sm btn-outline btn-danger", "title"=>'Give Rate', "data-toggle"=>"modal", "data-target"=>'#modalRating', "onclick"=>'rateVendor('."'".$r->vendorId."'".')']);
                                             }
                                             
                                         ?>
@@ -88,6 +91,39 @@
                     </tbody>
                     
                 </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal inmodal" id="modalRating" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated flipInY">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Give vendor Rating</h4>
+                <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <div class="idAwal">
+                        <input type='hidden' name='rating' id='rating' >
+                        <ul onMouseOut='resetRating(id)'>
+                            <?php
+                            for($i=1; $i<=5; $i++) {
+                                if($i <= $row["rating"]){ $selected = "selected"; }else{ $selected = ""; }
+                                    echo "<li class='$selected' onmouseover=\"highlightStar(this,$row[id_berita])\" onmouseout=\"removeHighlight($row[id_berita]);\" onClick=\"addRating(this,$row[id_berita])\">★</li>"; 
+                            }
+                            ?>
+                        <ul>
+                    </div>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
